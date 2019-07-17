@@ -7,26 +7,32 @@
 //
 
 import Foundation
+import AppCenterData
 
-class ToDoItem {
+class ToDoItem : NSObject, MSSerializableDocument {
+    
     var title: String
     var isDone: Bool
+    var tid : String
     
     init(title: String) {
         self.title = title
         self.isDone = false
+        self.tid = UUID.init().uuidString
     }
     
     required init(from dictionary: [AnyHashable : Any]) {
         self.title = dictionary["title"] as! String
         self.isDone = dictionary["isDone"] as! Bool
+        self.tid = dictionary["tid"] as! String
         
     }
     
     func serializeToDictionary() -> [AnyHashable : Any] {
         return [
             "title" : self.title,
-            "isDone" : self.isDone
+            "isDone" : self.isDone,
+            "tid" : self.tid
         ]
     }
 }
