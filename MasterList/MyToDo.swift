@@ -16,6 +16,19 @@ class ToDoItem {
         self.title = title
         self.isDone = false
     }
+    
+    required init(from dictionary: [AnyHashable : Any]) {
+        self.title = dictionary["title"] as! String
+        self.isDone = dictionary["isDone"] as! Bool
+        
+    }
+    
+    func serializeToDictionary() -> [AnyHashable : Any] {
+        return [
+            "title" : self.title,
+            "isDone" : self.isDone
+        ]
+    }
 }
 
 extension ToDoItem {

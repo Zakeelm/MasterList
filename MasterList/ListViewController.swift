@@ -8,6 +8,7 @@
 
 import UIKit
 import AppCenterAuth
+import AppCenterData
 
 class ListViewController: UITableViewController {
 
@@ -50,7 +51,7 @@ class ListViewController: UITableViewController {
                                     // Get display name.
                                     let displayName = claims!["given_name"] as! String
                                     // Do something with display name.
-                                    self.userName = displayName as! String
+                                    self.userName = displayName 
                                     self.title = "\(self.userName)'s Master List"
                                 
                                
