@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B33F7ED50B12433B35DA11 /* Pods_MasterList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E2FAFB1AE686A9CDD42717 /* Pods_MasterList.framework */; };
 		65C7368322DE7A0D0006F529 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7368222DE7A0D0006F529 /* AppDelegate.swift */; };
 		65C7368522DE7A0D0006F529 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7368422DE7A0D0006F529 /* ListViewController.swift */; };
 		65C7368822DE7A0D0006F529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C7368622DE7A0D0006F529 /* Main.storyboard */; };
@@ -17,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12E2FAFB1AE686A9CDD42717 /* Pods_MasterList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		29C0EE66D7E584514659B9B7 /* Pods-MasterList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterList.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterList/Pods-MasterList.release.xcconfig"; sourceTree = "<group>"; };
+		656F2EB822DE98510049851B /* MasterList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MasterList.entitlements; sourceTree = "<group>"; };
 		65C7367F22DE7A0D0006F529 /* MasterList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C7368222DE7A0D0006F529 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65C7368422DE7A0D0006F529 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +30,7 @@
 		65C7368F22DE7A0E0006F529 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65C7369122DE7A0E0006F529 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65C7369722DE7B7B0006F529 /* MyToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDo.swift; sourceTree = "<group>"; };
+		A03A8FB23A22BB457C1305A7 /* Pods-MasterList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterList/Pods-MasterList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +38,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B33F7ED50B12433B35DA11 /* Pods_MasterList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C00E3018AAE51332D75AD5D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12E2FAFB1AE686A9CDD42717 /* Pods_MasterList.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		65C7367622DE7A0D0006F529 = {
 			isa = PBXGroup;
 			children = (
 				65C7368122DE7A0D0006F529 /* MasterList */,
 				65C7368022DE7A0D0006F529 /* Products */,
+				A5E0502D835BE2B7730ECD7A /* Pods */,
+				1C00E3018AAE51332D75AD5D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +74,7 @@
 		65C7368122DE7A0D0006F529 /* MasterList */ = {
 			isa = PBXGroup;
 			children = (
+				656F2EB822DE98510049851B /* MasterList.entitlements */,
 				65C7368222DE7A0D0006F529 /* AppDelegate.swift */,
 				65C7368422DE7A0D0006F529 /* ListViewController.swift */,
 				65C7368622DE7A0D0006F529 /* Main.storyboard */,
@@ -70,6 +87,15 @@
 			path = MasterList;
 			sourceTree = "<group>";
 		};
+		A5E0502D835BE2B7730ECD7A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A03A8FB23A22BB457C1305A7 /* Pods-MasterList.debug.xcconfig */,
+				29C0EE66D7E584514659B9B7 /* Pods-MasterList.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +103,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65C7369422DE7A0E0006F529 /* Build configuration list for PBXNativeTarget "MasterList" */;
 			buildPhases = (
+				B0F83CBFD8AB520A036075D0 /* [CP] Check Pods Manifest.lock */,
 				65C7367B22DE7A0D0006F529 /* Sources */,
 				65C7367C22DE7A0D0006F529 /* Frameworks */,
 				65C7367D22DE7A0D0006F529 /* Resources */,
@@ -102,6 +129,11 @@
 				TargetAttributes = {
 					65C7367E22DE7A0D0006F529 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -135,6 +167,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B0F83CBFD8AB520A036075D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MasterList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65C7367B22DE7A0D0006F529 /* Sources */ = {
@@ -288,9 +345,12 @@
 		};
 		65C7369522DE7A0E0006F529 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A03A8FB23A22BB457C1305A7 /* Pods-MasterList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MasterList/MasterList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Q77N7995D;
 				INFOPLIST_FILE = MasterList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,9 +365,12 @@
 		};
 		65C7369622DE7A0E0006F529 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29C0EE66D7E584514659B9B7 /* Pods-MasterList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MasterList/MasterList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Q77N7995D;
 				INFOPLIST_FILE = MasterList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

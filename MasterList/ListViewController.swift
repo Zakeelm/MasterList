@@ -7,17 +7,82 @@
 //
 
 import UIKit
+import AppCenterAuth
 
 class ListViewController: UITableViewController {
 
     private var todoItems = [ToDoItem]()
+    private var userName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "Master List"
+        signIn()
+
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ListViewController.didTapAddItemButton(_:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(ListViewController.signOut))
+        
+      
+    }
+    
+    func signIn() {
+        
+        MSAuth.signIn { userInformation, error in
+            
+            if error == nil {
+                // Sign-in succeeded.
+                //var accountId = userInformation!.accountId;
+               // var idToken = userInformation.
+                let idToken = userInformation?.idToken
+                let tokenSplit = idToken?.components(separatedBy: ".")
+                if tokenSplit != nil && tokenSplit!.count > 1 {
+                    var rawClaims = tokenSplit![1]
+                    let paddedLength = rawClaims.count + (4 - rawClaims.count % 4) % 4
+                    rawClaims = rawClaims.padding(toLength: paddedLength, withPad: "=", startingAt: 0)
+                    let claimsData = Data(base64Encoded: rawClaims, options: .ignoreUnknownCharacters)
+                    do {
+                        if claimsData != nil {
+                            let claims = try JSONSerialization.jsonObject(with: claimsData!, options: []) as? [AnyHashable: Any]
+                            if claims != nil {
+                                
+                                    // Get display name.
+                                    let displayName = claims!["given_name"] as! String
+                                    // Do something with display name.
+                                    self.userName = displayName as! String
+                                    self.title = "\(self.userName)'s Master List"
+                                
+                               
+                            }
+                        }
+                    } catch {
+                        
+                        // Handle error.
+                    }
+                }
+                
+                
+            } else {
+                // Do something with sign failure.
+            }
+            
+        }
+        
+    }
+    
+    @objc func signOut() {
+        MSAuth.signOut()
+        empty()
+        signIn()
+    }
+    
+    func empty() {
+        self.todoItems = []
+        self.userName = String()
+        self.title = "Master List"
+        tableView.reloadData()
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
