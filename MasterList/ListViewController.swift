@@ -14,6 +14,7 @@ class ListViewController: UITableViewController {
 
     private var todoItems = [ToDoItem]()
     private var userName = String()
+    private var fetchedArrayCount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,8 @@ class ListViewController: UITableViewController {
                                     // Do something with display name.
                                     self.userName = displayName 
                                     self.title = "\(self.userName)'s Master List"
+                                    self.fetchList()
+
                                 
                                
                             }
@@ -71,6 +74,8 @@ class ListViewController: UITableViewController {
         }
         
     }
+    
+  
     
     @objc func signOut() {
         MSAuth.signOut()
@@ -97,16 +102,37 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_todo", for: indexPath)
-        
-        if indexPath.row < todoItems.count {
-            let item = todoItems[indexPath.row]
-            cell.textLabel?.text = item.title
-            
-            let accessory: UITableViewCell.AccessoryType = item.isDone ? .checkmark : .none
-            cell.accessoryType = accessory
+        //self.fetchList()
+
+            if indexPath.row < self.todoItems.count {
+                let item = self.todoItems[indexPath.row]
+                cell.textLabel?.text = item.title
+    
+                let accessory: UITableViewCell.AccessoryType = item.isDone ? .checkmark : .none
+                cell.accessoryType = accessory
         }
+    
         
         return cell
+    }
+    
+    func fetchList() {
+        
+        //var todoItems = [ToDoItem]()
+        MSData.listDocuments(withType: ToDoItem.self, partition: kMSDataUserDocumentsPartition) { (documents) in
+            //loop over items in current page
+            let currentPageItems = documents.currentPage().items
+            for docs in currentPageItems! {
+                let tempTask = docs.deserializedValue as! ToDoItem
+                //todoItems.append(tempTask)
+                self.todoItems.append(tempTask)
+            }
+           // self.tableView.reloadData()
+            OperationQueue.main.addOperation {
+                self.tableView.reloadData()
+            }
+        }
+      
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -116,7 +142,9 @@ class ListViewController: UITableViewController {
         if indexPath.row < todoItems.count {
             let item = todoItems[indexPath.row]
             item.isDone = !item.isDone
-            
+            MSData.replace(withDocumentID: item.tid, document: item, partition: kMSDataUserDocumentsPartition) { (document) in
+                // do something with the document
+            }
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
@@ -155,8 +183,12 @@ class ListViewController: UITableViewController {
         let newIndex = todoItems.count
         
         // Create new item and add it to the todo items list
-        todoItems.append(ToDoItem(title: title))
-        
+        let addedItem = ToDoItem(title : title)
+        todoItems.append(addedItem)
+        MSData.create(withDocumentID: addedItem.tid, document: addedItem, partition: kMSDataUserDocumentsPartition) { (document) in
+            // do something with the document
+        }
+      
         // Tell the table view a new row has been created
         tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
     }
@@ -164,7 +196,11 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if indexPath.row < todoItems.count {
+            var deletedItem = todoItems[indexPath.row]
             todoItems.remove(at: indexPath.row)
+            MSData.delete(withDocumentID: deletedItem.tid, partition: kMSDataUserDocumentsPartition) { (document) in
+                // do something with the document
+            }
             tableView.deleteRows(at: [indexPath], with: .top)
         }
     }
@@ -172,4 +208,5 @@ class ListViewController: UITableViewController {
 
 
 }
+
 
